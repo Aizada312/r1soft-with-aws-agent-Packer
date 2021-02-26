@@ -14,10 +14,10 @@
         "instance_type": "t2.micro",
         "region": "{{user `region`}}",
         "ssh_username": "centos",
+        "ami_name": "r1soft-example {{timestamp}}",
         "ssh_keypair_name": "london-bastion",
-        "ssh_private_key_file": "~/.ssh/id_rsa",
-        "ami_name": "r1soft-example {{timestamp}}"
-      }
+        "ssh_private_key_file": "~/.ssh/id_rsa"
+       }
     ],
     "provisioners": [
       {
@@ -29,6 +29,7 @@
         { 
           "type": "shell",
           "inline":[
+            "sudo yum update -y",
             "sudo curl -O https://inspector-agent.amazonaws.com/linux/latest/install",
             "sudo bash install https://docs.aws.amazon.com/inspector/latest/userguide/inspector_installing-uninstalling-agents.html", 
             "sudo yum install epel-release -y",
